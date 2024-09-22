@@ -27,6 +27,7 @@ namespace Company.Web
             builder.Services.AddScoped<IGenericRepositroy<Employee>, GenericRepository<Employee>>();
 
 
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
