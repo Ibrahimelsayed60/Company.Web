@@ -24,22 +24,23 @@
                 <td>
                     @deparment.Name
                 </td>
-                <td>
+                @* <td>
                         <a asp-action="Details" asp-route-id="@deparment.Id" class="btn btn-warning">
                         <i class="fas fa-eye"></i> Details
                     </a>
                 </td>
                 <td>
-                        <a asp-action="Update" asp-route-id?="@deparment.Id" class="btn btn-success">
+                        <a asp-action="Update" asp-route-id="@deparment.Id" class="btn btn-success">
                         <i class="fas fa-edit"></i> Update
                     </a>
                 </td>
 
                 <td>
-                        <a asp-action="Delete" asp-route-id?="@deparment.Id" class="btn btn-danger">
+                        <a asp-action="Delete" asp-route-id="@deparment.Id" class="btn btn-danger">
                         <i class="fas fa-trash"></i> Delete
                     </a>
-                </td>
+                </td> *@
+                <partial name="_ActionButtonsPartialView" model="@deparment.Id.ToString()" />
             </tr>
             }
         </tbody>
