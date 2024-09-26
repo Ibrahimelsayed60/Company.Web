@@ -30,7 +30,7 @@ namespace Company.Service.Services
 
         public IEnumerable<Department> GetAll()
         {
-            var dept = _departmentRepository.GetAll();
+            var dept = _departmentRepository.GetAll().Where(x=>x.IsDeleted != true);
             return dept;
         }
 
@@ -49,9 +49,23 @@ namespace Company.Service.Services
             return dept;
         }
 
-        public void Update(Department employee)
+        public void Update(Department entity)
         {
-            throw new NotImplementedException();
+            var dept = GetById(entity.Id);
+
+            if (dept.Name == entity.Name)
+            {
+                if (GetAll().Any(x => x.Name == entity.Name))
+                {
+                    throw new Exception("Duplicated Department Name");
+                }
+            }
+            dept.Name = entity.Name;
+            dept.Code = entity.Code;
+
+            _departmentRepository.Update(dept);
+
+
         }
     }
 }
