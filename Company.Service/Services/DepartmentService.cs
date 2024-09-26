@@ -11,26 +11,38 @@ namespace Company.Service.Services
 {
     public class DepartmentService : IDepartmentService
     {
-        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DepartmentService(IDepartmentRepository departmentRepository)
+        //private readonly IDepartmentRepository _departmentRepository;
+
+        public DepartmentService(IUnitOfWork unitOfWork)
         {
-            _departmentRepository = departmentRepository;
+            _unitOfWork = unitOfWork;
+            //_departmentRepository = unitOfWork;
         }
 
-        public void Add(Department employee)
+        public void Add(Department entity)
         {
-            _departmentRepository.Add(employee);
+            var MappedDepartment = new Department
+            {
+                Code = entity.Code,
+                Name = entity.Name,
+                CreatedAt = DateTime.Now
+            };
+
+            _unitOfWork.departmentRepository.Add(MappedDepartment);
+            _unitOfWork.Complete();
         }
 
-        public void Delete(Department employee)
+        public void Delete(Department entity)
         {
-            _departmentRepository.Delete(employee);
+            _unitOfWork.departmentRepository.Delete(entity);
         }
 
         public IEnumerable<Department> GetAll()
         {
-            var dept = _departmentRepository.GetAll().Where(x=>x.IsDeleted != true);
+            //var dept = departmentRepository.GetAll().Where(x=>x.IsDeleted != true);
+            var dept = _unitOfWork.departmentRepository.GetAll();
             return dept;
         }
 
@@ -41,7 +53,7 @@ namespace Company.Service.Services
                 return null;
             }
 
-            var dept = _departmentRepository.GetById(id.Value);
+            var dept = _unitOfWork.departmentRepository.GetById(id.Value);
             if(dept is null)
             {
                 return null;
@@ -63,8 +75,8 @@ namespace Company.Service.Services
             dept.Name = entity.Name;
             dept.Code = entity.Code;
 
-            _departmentRepository.Update(dept);
-
+            _unitOfWork.departmentRepository.Update(dept);
+            _unitOfWork.Complete();
 
         }
     }

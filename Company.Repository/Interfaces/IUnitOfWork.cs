@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Company.Repository.Interfaces
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        public IDepartmentRepository departmentRepository { get; set; }
+
+        public IEmployeeRepository employeeRepository { get; set; }
+
+        int Complete();
     }
 }
