@@ -30,6 +30,7 @@ namespace Company.Web
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             builder.Services.AddAutoMapper(x => x.AddProfile(new EmployeeProfile()));
+            builder.Services.AddAutoMapper(x => x.AddProfile(new DepartmentProfile()));
             //builder.Services.AddScoped<IGenericRepositroy<Department>, GenericRepository<Department>>();
             //builder.Services.AddScoped<IGenericRepositroy<Employee>, GenericRepository<Employee>>();
 

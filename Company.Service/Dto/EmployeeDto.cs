@@ -1,4 +1,5 @@
 ﻿using Company.Data.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Company.Service.Dto
 {
-    public class EmployeeDto
+    public class EmployeeDto:BaseEntity
     {
         public string Name { get; set; }
 
@@ -22,6 +23,8 @@ namespace Company.Service.Dto
         public string PhoneNumber { get; set; }
 
         public DateTime HiringDate { get; set; }
+
+        public IFormFile Image { get; set; }
 
         public string ImgeUrl { get; set; }
 
