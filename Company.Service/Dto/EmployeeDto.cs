@@ -1,12 +1,11 @@
 ﻿using Company.Data.Models;
-using Company.Service.Interfaces.Department;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Company.Service.Interfaces.Employee.Dto
+namespace Company.Service.Dto
 {
     public class EmployeeDto
     {
@@ -18,9 +17,9 @@ namespace Company.Service.Interfaces.Employee.Dto
 
         public decimal Salary { get; set; }
 
-        public String Email { get; set; }
+        public string Email { get; set; }
 
-        public String PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public DateTime HiringDate { get; set; }
 

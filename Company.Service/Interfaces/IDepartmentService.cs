@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Company.Data.Models;
-using Company.Service.Interfaces.Department;
+using Company.Service.Dto;
 
 namespace Company.Service.Interfaces
 {

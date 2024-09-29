@@ -1,7 +1,7 @@
 ﻿using Company.Data.Models;
 using Company.Repository.Interfaces;
+using Company.Service.Dto;
 using Company.Service.Interfaces;
-using Company.Service.Interfaces.Department;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,14 +37,29 @@ namespace Company.Service.Services
 
         public void Delete(DepartmentDto entity)
         {
-            _unitOfWork.departmentRepository.Delete(entity);
+            Department dept = new Department
+            {
+                Name = entity.Name,
+                Code = entity.Code,
+                CreatedAt = DateTime.Now,
+                Id = entity.Id
+            };
+            _unitOfWork.departmentRepository.Delete(dept);
         }
 
         public IEnumerable<DepartmentDto> GetAll()
         {
             //var dept = departmentRepository.GetAll().Where(x=>x.IsDeleted != true);
             var dept = _unitOfWork.departmentRepository.GetAll();
-            return dept;
+
+            var MappedDept = dept.Select(x => new DepartmentDto
+            {
+                Code=x.Code,
+                Name=x.Name,
+                Id=x.Id
+            });
+
+            return MappedDept;
         }
 
         public DepartmentDto GetById(int? id)
@@ -59,7 +74,13 @@ namespace Company.Service.Services
             {
                 return null;
             }
-            return dept;
+            DepartmentDto deptDto = new DepartmentDto
+            {
+                Id = dept.Id,
+                Code = dept.Code,
+                Name = dept.Name,
+            };
+            return deptDto;
         }
 
         public void Update(DepartmentDto entity)

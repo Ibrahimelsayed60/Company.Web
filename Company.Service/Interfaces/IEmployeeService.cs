@@ -1,5 +1,5 @@
 ﻿using Company.Data.Models;
-using Company.Service.Interfaces.Employee.Dto;
+using Company.Service.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
