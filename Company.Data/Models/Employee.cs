@@ -23,7 +23,7 @@ namespace Company.Data.Models
 
         public DateTime HiringDate { get; set; }
 
-        public IFormFile Image { get; set; }
+        //public IFormFile Image { get; set; }
 
         public string ImgeUrl { get; set; }
 

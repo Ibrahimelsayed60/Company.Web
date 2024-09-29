@@ -2,6 +2,7 @@
 using Company.Data.Models;
 using Company.Repository.Interfaces;
 using Company.Service.Dto;
+using Company.Service.Helper;
 using Company.Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,7 @@ namespace Company.Service.Services
             //    PhoneNumber = entityDto.PhoneNumber,
             //    Salary = entityDto.Salary,
             //};
+            entityDto.ImgeUrl = DocumentSettings.UploadFile(entityDto.Image, "Images");
             Employee employee = _mapper.Map<Employee>(entityDto);
             _unitOfWork.employeeRepository.Add(employee);
             _unitOfWork.Complete();
