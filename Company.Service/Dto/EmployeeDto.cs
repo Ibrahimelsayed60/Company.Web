@@ -28,9 +28,9 @@ namespace Company.Service.Dto
         [NotMapped]
         public IFormFile Image { get; set; }
 
-        public string ImgeUrl { get; set; }
+        public string? ImgeUrl { get; set; }
 
-        public DepartmentDto Department { get; set; }
+        public DepartmentDto? Department { get; set; }
 
         public int? DepartmentId { get; set; }
 

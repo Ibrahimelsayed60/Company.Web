@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Company.Data.Models;
+using Company.Service.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace Company.Service.Mapping
     {
         public DepartmentProfile()
         {
-            CreateMap<Department, DepartmentProfile>().ReverseMap();
+            CreateMap<Department, DepartmentDto>().ReverseMap();
+            //CreateMap<Employee, EmployeeDto>().ReverseMap();
         }
     }
 }

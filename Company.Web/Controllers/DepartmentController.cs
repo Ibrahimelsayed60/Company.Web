@@ -63,23 +63,23 @@ namespace Company.Web.Controllers
             return View(viewname,dept);
         }
 
-        [HttpGet]
-        public IActionResult Update(int? id)
-        {
-            return Details(id, "Update");
-        }
+        //[HttpGet]
+        //public IActionResult Update(int? id)
+        //{
+        //    return Details(id, "Update");
+        //}
 
-        [HttpPost]
-        public IActionResult Update(int?id,Department department)
-        {
-            if(department.Id != id.Value)
-            {
-                return RedirectToAction("NotFoundPage", null, "Home");
-            }
+        //[HttpPost]
+        //public IActionResult Update(int?id,Department department)
+        //{
+        //    if(department.Id != id.Value)
+        //    {
+        //        return RedirectToAction("NotFoundPage", null, "Home");
+        //    }
 
-            _departmentService.Update(department);
-            return RedirectToAction(nameof(Index));
-        }
+        //    _departmentService.Update(department);
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         [HttpGet]
         public IActionResult Delete(int id)

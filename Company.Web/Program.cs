@@ -35,6 +35,8 @@ namespace Company.Web
             //builder.Services.AddScoped<IGenericRepositroy<Department>, GenericRepository<Department>>();
             //builder.Services.AddScoped<IGenericRepositroy<Employee>, GenericRepository<Employee>>();
 
+
+
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(config =>
             {
                 config.Password.RequiredUniqueChars = 2;

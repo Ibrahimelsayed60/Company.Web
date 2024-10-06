@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,10 +26,10 @@ namespace Company.Data.Models
 
         //public IFormFile Image { get; set; }
 
-        public string ImgeUrl { get; set; }
+        public string? ImgeUrl { get; set; }
 
-        public Department Department { get; set; }
-
+        public Department? Department { get; set; }
+        [ForeignKey("Department")]
         public int? DepartmentId { get; set; }
     }
 }

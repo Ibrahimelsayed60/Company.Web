@@ -33,7 +33,7 @@ namespace Company.Service.Services
             //    Name = entity.Name,
             //    CreatedAt = DateTime.Now
             //};
-            Department department = _mapper.Map<Department>(entity);
+            Department department = _mapper.Map<DepartmentDto,Department>(entity);
             _unitOfWork.departmentRepository.Add(department);
             _unitOfWork.Complete();
         }
@@ -58,12 +58,14 @@ namespace Company.Service.Services
 
             //var MappedDept = dept.Select(x => new DepartmentDto
             //{
-            //    Code=x.Code,
-            //    Name=x.Name,
-            //    Id=x.Id
+            //    Code = x.Code,
+            //    Name = x.Name,
+            //    Id = x.Id
             //});
 
-            IEnumerable<DepartmentDto> result = _mapper.Map<IEnumerable<DepartmentDto>>(dept);
+            //DepartmentDto dto = _mapper.Map<Department, DepartmentDto>(dept.FirstOrDefault());
+
+            IEnumerable<DepartmentDto> result = _mapper.Map< IEnumerable<Department> ,IEnumerable <DepartmentDto>>(dept);
             return result;
         }
 
@@ -79,34 +81,34 @@ namespace Company.Service.Services
             {
                 return null;
             }
-            //DepartmentDto deptDto = new DepartmentDto
-            //{
-            //    Id = dept.Id,
-            //    Code = dept.Code,
-            //    Name = dept.Name,
-            //};
-            DepartmentDto deptDto = _mapper.Map<DepartmentDto>(dept);
+            DepartmentDto deptDto = new DepartmentDto
+            {
+                Id = dept.Id,
+                Code = dept.Code,
+                Name = dept.Name,
+            };
+            //DepartmentDto deptDto = _mapper.Map<DepartmentDto>(dept);
             return deptDto;
         }
 
-        public void Update(Department entity)
-        {
-            var dept = GetById(entity.Id);
+        //public void Update(Department entity)
+        //{
+        //    var dept = GetById(entity.Id);
 
-            if (dept.Name == entity.Name)
-            {
-                if (GetAll().Any(x => x.Name == entity.Name))
-                {
-                    throw new Exception("Duplicated Department Name");
-                }
-            }
-            dept.Name = entity.Name;
-            dept.Code = entity.Code;
+        //    if (dept.Name == entity.Name)
+        //    {
+        //        if (GetAll().Any(x => x.Name == entity.Name))
+        //        {
+        //            throw new Exception("Duplicated Department Name");
+        //        }
+        //    }
+        //    dept.Name = entity.Name;
+        //    dept.Code = entity.Code;
 
-            //Department dept1 = _mapper.Map<DepartmentDto>(dept);
-            _unitOfWork.departmentRepository.Update(dept);
-            _unitOfWork.Complete();
+        //    //Department dept1 = _mapper.Map<DepartmentDto>(dept);
+        //    _unitOfWork.departmentRepository.Update(dept);
+        //    _unitOfWork.Complete();
 
-        }
+        //}
     }
 }
