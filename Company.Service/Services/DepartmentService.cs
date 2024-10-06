@@ -47,7 +47,7 @@ namespace Company.Service.Services
             //    CreatedAt = DateTime.Now,
             //    Id = entity.Id
             //};
-            Department dept = _mapper.Map<Department>(entity);
+            Department dept = _mapper.Map<DepartmentDto,Department>(entity);
             _unitOfWork.departmentRepository.Delete(dept);
         }
 

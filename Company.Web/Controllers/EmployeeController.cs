@@ -69,5 +69,25 @@ namespace Company.Web.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var dept = _employeeService.GetById(id);
+
+            if (dept is null)
+            {
+                return RedirectToAction("NotFoundPage", null, "Home");
+            }
+
+            //Soft Delete
+            //dept.IsDeleted = true;
+            //_departmentService.Update(dept);
+
+            _employeeService.Delete(dept);
+
+            return RedirectToAction(nameof(Index));
+
+        }
     }
 }

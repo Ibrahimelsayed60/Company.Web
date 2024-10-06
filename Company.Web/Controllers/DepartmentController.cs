@@ -95,6 +95,7 @@ namespace Company.Web.Controllers
             //dept.IsDeleted = true;
             //_departmentService.Update(dept);
 
+
             _departmentService.Delete(dept);
 
             return RedirectToAction(nameof(Index));

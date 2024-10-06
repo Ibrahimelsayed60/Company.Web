@@ -26,7 +26,7 @@ namespace Company.Service.Dto
         public DateTime HiringDate { get; set; }
 
         [NotMapped]
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
 
         public string? ImgeUrl { get; set; }
 
