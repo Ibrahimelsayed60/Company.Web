@@ -13,12 +13,14 @@ namespace Company.Service.Interfaces
     {
         DepartmentDto GetById(int? id);
 
+        Department Get(int? id);
+
         IEnumerable<DepartmentDto> GetAll();
 
         void Add(DepartmentDto employee);
 
-        //void Update(DepartmentDto employee);
+        void Update(Department employee);
 
-        void Delete(DepartmentDto employee);
+        void Delete(Department employee);
     }
 }

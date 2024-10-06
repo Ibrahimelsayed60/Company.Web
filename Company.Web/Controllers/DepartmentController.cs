@@ -53,7 +53,7 @@ namespace Company.Web.Controllers
 
         public IActionResult Details(int? id, string viewname="Details")
         {
-            var dept = _departmentService.GetById(id);
+            var dept = _departmentService.Get(id);
 
             if (dept is null)
             {
@@ -63,28 +63,28 @@ namespace Company.Web.Controllers
             return View(viewname,dept);
         }
 
-        //[HttpGet]
-        //public IActionResult Update(int? id)
-        //{
-        //    return Details(id, "Update");
-        //}
-
-        //[HttpPost]
-        //public IActionResult Update(int?id,Department department)
-        //{
-        //    if(department.Id != id.Value)
-        //    {
-        //        return RedirectToAction("NotFoundPage", null, "Home");
-        //    }
-
-        //    _departmentService.Update(department);
-        //    return RedirectToAction(nameof(Index));
-        //}
-
         [HttpGet]
+        public IActionResult Update(int? id)
+        {
+            return Details(id, "Update");
+        }
+
+        [HttpPost]
+        public IActionResult Update(int? id, Department department)
+        {
+            if (department.Id != id.Value)
+            {
+                return RedirectToAction("NotFoundPage", null, "Home");
+            }
+
+            _departmentService.Update(department);
+            return RedirectToAction(nameof(Index));
+        }
+
+        //[HttpGet]
         public IActionResult Delete(int id)
         {
-            var dept = _departmentService.GetById(id);
+            var dept = _departmentService.Get(id);
 
             if (dept is null)
             {

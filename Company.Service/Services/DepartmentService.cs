@@ -38,7 +38,7 @@ namespace Company.Service.Services
             _unitOfWork.Complete();
         }
 
-        public void Delete(DepartmentDto entity)
+        public void Delete(Department entity)
         {
             //Department dept = new Department
             //{
@@ -47,8 +47,18 @@ namespace Company.Service.Services
             //    CreatedAt = DateTime.Now,
             //    Id = entity.Id
             //};
-            Department dept = _mapper.Map<DepartmentDto,Department>(entity);
-            _unitOfWork.departmentRepository.Delete(dept);
+            //Department dept = _mapper.Map<DepartmentDto,Department>(entity);
+            _unitOfWork.departmentRepository.Delete(entity);
+            _unitOfWork.Complete();
+        }
+
+        public Department Get(int? id)
+        {
+
+            var dept = _unitOfWork.departmentRepository.GetById(id.Value);
+            if(dept is null)
+                return null;
+            return dept;
         }
 
         public IEnumerable<DepartmentDto> GetAll()
@@ -91,24 +101,24 @@ namespace Company.Service.Services
             return deptDto;
         }
 
-        //public void Update(Department entity)
-        //{
-        //    var dept = GetById(entity.Id);
+        public void Update(Department entity)
+        {
+            var dept = Get(entity.Id);
 
-        //    if (dept.Name == entity.Name)
-        //    {
-        //        if (GetAll().Any(x => x.Name == entity.Name))
-        //        {
-        //            throw new Exception("Duplicated Department Name");
-        //        }
-        //    }
-        //    dept.Name = entity.Name;
-        //    dept.Code = entity.Code;
+            if (dept.Name == entity.Name)
+            {
+                if (GetAll().Any(x => x.Name == entity.Name))
+                {
+                    throw new Exception("Duplicated Department Name");
+                }
+            }
+            dept.Name = entity.Name;
+            dept.Code = entity.Code;
 
-        //    //Department dept1 = _mapper.Map<DepartmentDto>(dept);
-        //    _unitOfWork.departmentRepository.Update(dept);
-        //    _unitOfWork.Complete();
+            //Department dept1 = _mapper.Map<DepartmentDto>(dept);
+            _unitOfWork.departmentRepository.Update(dept);
+            _unitOfWork.Complete();
 
-        //}
+        }
     }
 }
