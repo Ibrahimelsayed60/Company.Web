@@ -1,5 +1,6 @@
 ﻿using Company.Data.Models;
 using Company.Repository.Interfaces;
+using Company.Service.Dto;
 using Company.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace Company.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Department department)
+        public IActionResult Create(DepartmentDto department)
         {
             try
             {
@@ -52,7 +53,7 @@ namespace Company.Web.Controllers
 
         public IActionResult Details(int? id, string viewname="Details")
         {
-            var dept = _departmentService.GetById(id);
+            var dept = _departmentService.Get(id);
 
             if (dept is null)
             {
@@ -69,9 +70,9 @@ namespace Company.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(int?id,Department department)
+        public IActionResult Update(int? id, Department department)
         {
-            if(department.Id != id.Value)
+            if (department.Id != id.Value)
             {
                 return RedirectToAction("NotFoundPage", null, "Home");
             }
@@ -80,10 +81,10 @@ namespace Company.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        //[HttpGet]
         public IActionResult Delete(int id)
         {
-            var dept = _departmentService.GetById(id);
+            var dept = _departmentService.Get(id);
 
             if (dept is null)
             {
@@ -93,6 +94,7 @@ namespace Company.Web.Controllers
             //Soft Delete
             //dept.IsDeleted = true;
             //_departmentService.Update(dept);
+
 
             _departmentService.Delete(dept);
 

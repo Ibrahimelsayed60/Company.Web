@@ -1,4 +1,5 @@
 ﻿using Company.Data.Models;
+using Company.Service.Dto;
 using Company.Service.Interfaces;
 using Company.Service.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace Company.Web.Controllers
             _departmentService = departmentService;
         }
 
-        [HttpGet]   
+        //[HttpGet]   
         public IActionResult Index(string searchInp)
         {
             if(string.IsNullOrEmpty(searchInp)) 
@@ -45,7 +46,7 @@ namespace Company.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeDto employee)
         {
             try
             {
@@ -66,6 +67,26 @@ namespace Company.Web.Controllers
                 ModelState.AddModelError("DepartmentError", ex.Message);
                 return View(employee);
             }
+
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var dept = _employeeService.GetById(id);
+
+            if (dept is null)
+            {
+                return RedirectToAction("NotFoundPage", null, "Home");
+            }
+
+            //Soft Delete
+            //dept.IsDeleted = true;
+            //_departmentService.Update(dept);
+
+            _employeeService.Delete(dept);
+
+            return RedirectToAction(nameof(Index));
 
         }
     }
