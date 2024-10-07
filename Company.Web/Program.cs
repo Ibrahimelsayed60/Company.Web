@@ -5,6 +5,7 @@ using Company.Repository.Repositories;
 using Company.Service.Interfaces;
 using Company.Service.Mapping;
 using Company.Service.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +36,12 @@ namespace Company.Web
             //builder.Services.AddScoped<IGenericRepositroy<Department>, GenericRepository<Department>>();
             //builder.Services.AddScoped<IGenericRepositroy<Employee>, GenericRepository<Employee>>();
 
-
+            //builder.Services.AddScoped<UserManager<ApplicationUser>>();
+            //builder.Services.AddScoped<SignInManager<ApplicationUser>>();
+            //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            //                .AddEntityFrameworkStores<CompanyDbContext>();
+            
+            
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(config =>
             {
@@ -61,9 +67,13 @@ namespace Company.Web
                 options.AccessDeniedPath = "/Account/AccessDenied";
 
             });
+			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "Account/SignIn";
+                options.AccessDeniedPath = "Home/Error";
+            });
 
-
-            var app = builder.Build();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -85,7 +95,7 @@ namespace Company.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=SignIn}/{id?}");
 
             app.Run();
         }

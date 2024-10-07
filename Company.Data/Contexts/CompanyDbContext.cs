@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Company.Data.Contexts
 {
-    public class CompanyDbContext : IdentityDbContext
+    public class CompanyDbContext : IdentityDbContext<ApplicationUser>
     {
         public CompanyDbContext(DbContextOptions options) : base(options)
         {
